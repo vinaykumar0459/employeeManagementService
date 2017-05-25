@@ -3,16 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+
 
 const routes: Routes = [
   {
-    path:'',component:SigninComponent,children:[
-      // {
-      //   path:'signin',component:SigninComponent
-      // },
-      // {
-      //   path:'signup',component:SignupComponent
-      // },
+    path : '' , component : HomeComponent , children : [
+       {
+        path : '' , component : SigninComponent
+      },
+      {
+        path : 'changepassword', component : ChangepasswordComponent
+      },
+      {
+        path : 'forgotpassword', component : ForgotpasswordComponent
+      },
     ]
   }
 ];

@@ -4,6 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { EnrollmentRoutingModule } from './enrollment-routing.module';
 import { NgaModule } from '../../theme/nga.module';
+import {AppService} from "../../app.service";
 
 import { EnrollmentComponent } from './enrollment.component';
 import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
@@ -16,6 +17,7 @@ import { EmployeeRegisterComponent } from './employee-register/employee-register
     NgaModule,
     EnrollmentRoutingModule
   ],
-  declarations: [EnrollmentComponent, EmployeeRegisterComponent]
+  declarations: [EnrollmentComponent, EmployeeRegisterComponent],
+  providers:[AppService]
 })
 export class EnrollmentModule { }

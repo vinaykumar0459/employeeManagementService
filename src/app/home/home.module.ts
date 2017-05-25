@@ -6,6 +6,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 @NgModule({
   imports: [
@@ -14,6 +16,6 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,
     HomeRoutingModule
   ],
-  declarations: [HomeComponent, SigninComponent, SignupComponent]
+  declarations: [HomeComponent, SigninComponent, SignupComponent, ChangepasswordComponent, ForgotpasswordComponent]
 })
 export class HomeModule { }

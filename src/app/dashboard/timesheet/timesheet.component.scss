@@ -1,7 +1,12 @@
 @import '../../theme/sass/conf/conf';
 
 :host /deep/ ba-full-calendar {
-
+.ba-full-calendar.blurCalendar.fc.fc-unthemed.fc-ltr {
+    margin-right: 10% !important;
+}
+// .fc-view-container {
+//     margin-right: 10% !important;
+// }
   div.blurCalendar {
     font-size: 12px;
   }
@@ -263,9 +268,9 @@
   .fc-row {
     position: relative;
     table {
-      border-left: 0 hidden transparent;
-      border-right: 0 hidden transparent;
-      border-bottom: 0 hidden transparent;
+      border-left: 1px  solid transparent;
+      border-right: 1px  solid transparent;
+      border-bottom: 1px  solid transparent;
     }
 
     &:first-child table {
@@ -766,3 +771,5 @@
 /deep/.calendar-panel.card .card-body {
   padding: 0;
 }
+// newly added styles
+

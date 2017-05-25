@@ -1,46 +1,87 @@
-import {Component} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {EmailValidator, EqualPasswordsValidator} from '../../../theme/validators';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {AppService} from "../../../app.service";
 
 @Component({
   selector: 'app-employee-register',
   templateUrl: './employee-register.component.html',
   styleUrls: ['./employee-register.component.scss']
 })
-export class EmployeeRegisterComponent {
 
-  public form:FormGroup;
-  public name:AbstractControl;
-  public email:AbstractControl;
-  public password:AbstractControl;
-  public repeatPassword:AbstractControl;
-  public passwords:FormGroup;
+export class EmployeeRegisterComponent implements OnInit {
+       user:UserDetails;
 
-  public submitted:boolean = false;
+  constructor(private router:Router,
+  private register:AppService,) {
 
-  constructor(fb:FormBuilder) {
+  this.user = {
+        ename: "" ,
+        email: "" ,
+        erole: "",
+        etype:"",
+        ctc: undefined,
+        epayroll: "",
+        designation:"",
+        rmanager: "",
+        mobile1: undefined,
+        mobile2: undefined,
+        dob: null,
+        doj: null,
+        address:"",
+        image:"",
+        jobstatus: false
+  }
+ }
+ data:any;
+  ngOnInit() {
+  }
 
-    this.form = fb.group({
-      'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'email': ['', Validators.compose([Validators.required, EmailValidator.validate])],
-      'passwords': fb.group({
-        'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-        'repeatPassword': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
-      }, {validator: EqualPasswordsValidator.validate('password', 'repeatPassword')})
+
+ fileChange($event) : void {
+    this.readThis($event.target);
+  }
+  readThis(inputValue: any): void {
+  var totalLength = inputValue.files;
+  for(var i = 0; i < totalLength.length; i++) {
+  var file:File = inputValue.files[i];
+
+  var myReader:FileReader = new FileReader();
+  myReader.onloadend = (e) => {
+    this.user.image = myReader.result;
+  }
+  myReader.readAsDataURL(file);
+  }
+}
+
+onRegisterSubmit(user){
+      this.register.url="http://localhost:3000/employee/createemployee";
+      this.register.data = user;
+
+      this.register.postService().subscribe(res=>{
+        console.log(res)
+        alert("Successfully registered")
     });
+}
 
-    this.name = this.form.controls['name'];
-    this.email = this.form.controls['email'];
-    this.passwords = <FormGroup> this.form.controls['passwords'];
-    this.password = this.passwords.controls['password'];
-    this.repeatPassword = this.passwords.controls['repeatPassword'];
-  }
+}
 
-  public onSubmit(values:Object):void {
-    this.submitted = true;
-    if (this.form.valid) {
-      // your code goes here
-      // console.log(values);
-    }
-  }
+class UserDetails {
+
+        ename: String;
+        email: String;
+        erole: String;
+        etype:String;
+        ctc: Number;
+        epayroll: String;
+        designation:String;
+        rmanager:String;
+        mobile1: Number;
+        mobile2: Number;
+        dob: Date;
+        doj: Date;
+        address:String;
+        image:String;
+        jobstatus:Boolean;
 }
